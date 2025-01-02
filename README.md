@@ -94,8 +94,11 @@ Yuki's display model was made to be interactive, inspired by [Vedal987](https://
                                            | 
                                 (TTS) + action control for model
                             
+## MVP Features
 
-
+- Conversational AI
+- Voice Input + Output
+- Full Wake
 
 ### Inspired by [Vedal987](https://github.com/Vedal987)'s [Neuro-sama](https://www.youtube.com/@Neurosama)
 
