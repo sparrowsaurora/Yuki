@@ -85,9 +85,9 @@ Yuki's display model was made to be interactive, inspired by [Vedal987](https://
                                  |                   |
                           Find Module Data   Check For Relevant
                                  |             data in Memory
-                            -----|                   |
-                            |    └── Gen Response ----
-            Complete module if not info    |
+                -----------------|                   |
+                |                └── Gen Response ----
+    Complete module if not info            |
                                 Retrieve Emotional Ref Data
                                            |
                                 Give Data To Model Controller

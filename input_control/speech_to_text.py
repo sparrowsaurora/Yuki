@@ -43,7 +43,8 @@ def process_audio():
 
         # transcribe via whisper
         result = model.transcribe(audio_data, fp16 = False)
-        print(f"Transcription: {result['text']}")
+        with open("input_control/stt_output.txt", "a") as f:
+            f.write(result['text'] + "\n")
 
 # Start audio
 with sd.InputStream(
