@@ -16,24 +16,23 @@ Here we will give the inputs to modules or the "personality"
 #     '''
 
 import multiprocessing
-import os
+from input_control.speech_to_text import Speech_to_text
+from voice_output.text_response import Text_Response
 
 def run_speech_to_text():
-    """
-    Run the speech-to-text module from input_control/speech_to_text.py.
-    """
-    os.system("python input_control/speech_to_text.py")
+    # Run the speech-to-text module from input_control/speech_to_text.py.
+    stt = Speech_to_text()
+    stt.main()
 
-def run_gen_response():
-    """
-    Run the response generation module from gen_response.py.
-    """
-    os.system("python voice_output/gen_response.py")
+def run_text_response():
+    # Run the response generation module from gen_response.py.
+    text_response = Text_Response()
+    text_response.main()
 
 def main():
     # Create separate processes for each script
     stt_process = multiprocessing.Process(target=run_speech_to_text)
-    response_process = multiprocessing.Process(target=run_gen_response)
+    response_process = multiprocessing.Process(target=run_text_response)
 
     # Start the processes
     stt_process.start()
