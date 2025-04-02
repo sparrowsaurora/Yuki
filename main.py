@@ -28,9 +28,9 @@ def run_gen_response():
     """
     Run the response generation module from gen_response.py.
     """
-    os.system("python gen_response.py")
+    os.system("python voice_output/gen_response.py")
 
-if __name__ == "__main__":
+def main():
     # Create separate processes for each script
     stt_process = multiprocessing.Process(target=run_speech_to_text)
     response_process = multiprocessing.Process(target=run_gen_response)
@@ -43,3 +43,5 @@ if __name__ == "__main__":
     stt_process.join()
     response_process.join()
 
+if __name__ == "__main__":
+    main()
