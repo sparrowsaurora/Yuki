@@ -7,7 +7,7 @@ class Text_Response:
         self.chat_log = []  # Store conversation history
         self.FILE_PATH = "input_control/stt_output.txt"
         # System instructions for the model (personalize the assistant's tone and behavior)
-        self.SYSTEM_CONTEXT = Personality.tsundere()
+        self.SYSTEM_CONTEXT = Personality.mommy()
 
     def generate_response(self, prompt):
         '''
@@ -20,7 +20,7 @@ class Text_Response:
         chat_history = "\n".join(self.chat_log[-5:])
 
         # Combine system context with the chat history and user prompt
-        final_prompt = f"{self.system_context}\n\n{chat_history}\nUser: {prompt}\nYuki:"
+        final_prompt = f"{self.SYSTEM_CONTEXT}\n\n{chat_history}\nUser: {prompt}\nYuki:"
 
         # Tokenize the prompt and generate a response
         response: ChatResponse = chat(
@@ -70,7 +70,7 @@ class Text_Response:
                 for transcription in self.watch_file():
                     print(f"You: {transcription}")
                     transcription = self.clean_prompt(transcription)
-                    response = self.generate_response(transcription, self.chat_log, self.SYSTEM_CONTEXT)
+                    response = self.generate_response(transcription)
                     print(f"Yuki: {response}")
 
                     # Update the conversation history with the latest input/output

@@ -25,7 +25,7 @@ class Speech_to_text:
         # Queue to store audio chunks
         self.audio_queue = queue.Queue()
 
-    def audio_callback(self, indata, status):
+    def audio_callback(self, indata, frames, time, status):
         '''
             Callback to collect audio chunks
         '''
