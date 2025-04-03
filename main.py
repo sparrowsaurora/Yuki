@@ -20,9 +20,9 @@ from voice_output.text_response import Text_Response
 
 def main():
     stt = Speech_to_text()
-    yuki = Text_Response()
+    tr = Text_Response()
 
-    print("Yuki is listening... Speak now.")
+    print("listening...")
 
     while True:
         try:
@@ -30,7 +30,7 @@ def main():
             
             if transcription:
                 print(f"You: {transcription}")
-                response = yuki.generate_response(transcription)
+                response = tr.generate_response(transcription)
                 print(f"Yuki: {response}")
 
         except KeyboardInterrupt:
