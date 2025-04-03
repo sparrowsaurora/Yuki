@@ -4,78 +4,59 @@ import time
 
 class Text_Response:
     def __init__(self):
-        self.chat_log = []  # Store conversation history
+        self.chat_log = []  
         self.FILE_PATH = "input_control/stt_output.txt"
-        # System instructions for the model (personalize the assistant's tone and behavior)
         self.SYSTEM_CONTEXT = Personality.mommy()
 
     def generate_response(self, prompt):
-        '''
-        Generate a coherent response based on user input and previous chat history.
-        '''
         if not prompt.strip():
             return "I didn't hear anything, please try again."
 
-        # Limit chat history to the last 5 exchanges to maintain context
-        chat_history = "\n".join(self.chat_log[-5:])
+        # Get conversation history from file
+        conversation_history = self.get_conversation_history()
 
-        # Combine system context with the chat history and user prompt
-        final_prompt = f"{self.SYSTEM_CONTEXT}\n\n{chat_history}\nUser: {prompt}\nYuki:"
-
-        # Tokenize the prompt and generate a response
+        final_prompt = f"{self.SYSTEM_CONTEXT}\n\n{conversation_history}\nUser: {prompt}\nYuki:"
         response: ChatResponse = chat(
-            model = 'llama3.2:1b', 
-            messages = [
-                {
-                    'role': 'user',
-                    'content': final_prompt,
-                    'stream': False,
-                },
-            ]
+            model='llama3.2:1b', 
+            messages=[{'role': 'user', 'content': final_prompt, 'stream': False}]
         )
-        # Decode the response and clean it
 
-        # Ensure the response makes sense and isn't empty
         if not response:
             response = "Hmm, I couldn't think of anything. Can you ask something else?"
 
         response = response.message.content
+        self.save_response(response)
         return response
 
-    def clean_prompt(self, prompt):
+    def get_conversation_history(self, max_lines=10):
         '''
-        Clean the user input to ensure proper formatting.
+        Read past transcriptions and get the last few exchanges.
         '''
-        prompt = prompt.strip()
-        if not prompt.endswith(('.', '?', '!')):
-            prompt += '.'
-        return prompt.capitalize()
+        try:
+            with open(self.FILE_PATH, "r") as file:
+                lines = file.readlines()
+                return "".join(lines[-max_lines:]).strip()
+        except FileNotFoundError:
+            return ""
 
-    def watch_file(self):
+    def save_response(self, response):
         '''
-            Continuously watch a file for new content
+        Save Yuki's response to maintain conversation history.
         '''
-        with open(self.FILE_PATH, 'r') as file:
-            file.seek(0, 2) # Go to the end of the file
-            while True:
-                line = file.readline()
-                if line:
-                    yield line.strip()
-                time.sleep(0.1)
+        with open(self.FILE_PATH, "a") as f:
+            f.write(f"Yuki: {response}\n")
 
     def main(self):
-        # Start a conversation loop
-        while True:
-            try:
-                for transcription in self.watch_file():
-                    print(f"You: {transcription}")
-                    transcription = self.clean_prompt(transcription)
-                    response = self.generate_response(transcription)
-                    print(f"Yuki: {response}")
+        '''
+        Continuously listen and respond.
+        '''
+        try:
+            transcription = self.get_conversation_history(max_lines=1)
+            print(f"You: {transcription}")
 
-                    # Update the conversation history with the latest input/output
-                    self.chat_log.append(f"User: {transcription}")
-                    self.chat_log.append(f"Yuki: {response}")
-            except KeyboardInterrupt:
-                print("Stopped watching file.")
+            if transcription:
+                response = self.generate_response(transcription)
+                print(f"Yuki: {response}")
 
+        except KeyboardInterrupt:
+            print("Stopped watching file.")

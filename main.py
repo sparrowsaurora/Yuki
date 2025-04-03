@@ -15,32 +15,27 @@ Here we will give the inputs to modules or the "personality"
 #     --> then loop back with previous information in data
 #     '''
 
-import multiprocessing
 from input_control.speech_to_text import Speech_to_text
 from voice_output.text_response import Text_Response
 
-def run_speech_to_text():
-    # Run the speech-to-text module from input_control/speech_to_text.py.
-    stt = Speech_to_text()
-    stt.main()
-
-def run_text_response():
-    # Run the response generation module from gen_response.py.
-    text_response = Text_Response()
-    text_response.main()
-
 def main():
-    # Create separate processes for each script
-    stt_process = multiprocessing.Process(target=run_speech_to_text)
-    response_process = multiprocessing.Process(target=run_text_response)
+    stt = Speech_to_text()
+    yuki = Text_Response()
 
-    # Start the processes
-    stt_process.start()
-    response_process.start()
+    print("Yuki is listening... Speak now.")
 
-    # Wait for the processes to complete
-    stt_process.join()
-    response_process.join()
+    while True:
+        try:
+            transcription = stt.get_speech()
+            
+            if transcription:
+                print(f"You: {transcription}")
+                response = yuki.generate_response(transcription)
+                print(f"Yuki: {response}")
+
+        except KeyboardInterrupt:
+            print("\nExiting...")
+            break
 
 if __name__ == "__main__":
     main()
