@@ -8,4 +8,4 @@
 ## Idea
 
 Uses Mixtral via OpenHermes with LoRa finetuning.
-These are the LoRa finetune files
+These are the LoRa finetune file ideas

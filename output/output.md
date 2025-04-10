@@ -2,8 +2,10 @@
 
 ## File Paths
 
-    voice_output/          # Controls the voice output
-     └── voice_output.md   # Description of the 'voice_output' directory
+    output/                 # Controls the voice output
+     ├── text_response.py   # Where the Script for the Voice is created from inputs
+     ├── voice_output.py    # Where the voice is rendered
+     └── output.md          # Description of the 'output' directory
 
 https://platform.openai.com/docs/guides/text-to-speech
 

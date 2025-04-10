@@ -77,16 +77,16 @@ Yuki's display model was made to be interactive, inspired by [Vedal987](https://
                                           |
                                      Clean Input
                                           │
-                                YES---If Command?----NO
-                                 |                   |
-                             Normalize          Emote Analysis
-                                 |                   |
-                              Modules           Personality
-                                 |                   |
-                          Find Module Data   Check For Relevant
+                                YES ─ If Command? ─── NO
+                                 |                    |
+                             Normalize           Emote Analysis
+                                 |                    |
+                              Modules            Personality
+                                 |                    |
+                           Get Module Data   Check For Relevant
                                  |             data in Memory
-                -----------------|                   |
-                |                └── Gen Response ----
+                ┌────────────────┤                    |
+                |                └── Gen Response ────┘
     Complete module if not info            |
                                 Retrieve Emotional Ref Data
                                            |
@@ -94,12 +94,12 @@ Yuki's display model was made to be interactive, inspired by [Vedal987](https://
                                            |
                                 (TTS) + action control for model
 
-
 ## MVP Features
 
 - Conversational AI
 - Voice Input + Output
 - Full Wake
+- Basic QoL Functions
 
 ### Inspired by [Vedal987](https://github.com/Vedal987)'s [Neuro-sama](https://www.youtube.com/@Neurosama)
 
