@@ -1,19 +1,13 @@
-# # speech_output.py
-# import pyttsx3
+import pyttsx3 # <- Strictly for Development
 
-# def speak(text):
-#     engine = pyttsx3.init()
-    
-#     # Get available voices
-#     voices = engine.getProperty('voices')
-    
-#     # Set voice to female (usually the second voice in the list)
-#     for voice in voices:
-#         if "female" in voice.name.lower():  # check if the voice is female
-#             engine.setProperty('voice', voice.id)
-#             break
-#     else:
-#         engine.setProperty('voice', voices[1].id)  # default to the second voice
-    
-#     engine.say(text)
-#     engine.runAndWait()
+class Voice:
+
+    @staticmethod
+    def speak(text):
+        engine = pyttsx3.init()
+
+        engine.setProperty('voice', engine.getProperty('voices')[1].id) # Set voice to female
+        engine.setProperty('rate', 125) # Set rate for Speech
+        
+        engine.say(text) #Speak
+        engine.runAndWait() # Wait but keep active

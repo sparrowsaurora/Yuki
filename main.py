@@ -16,25 +16,25 @@ Here we will give the inputs to modules or the "personality"
 #     '''
 
 from input_control.speech_to_text import Speech_to_text
-from voice_output.text_response import Text_Response
+from output.text_response import Text_Response
 
 def main():
     stt = Speech_to_text()
-    tr = Text_Response()
+    tr = Text_Response("soft_dom") # takes one arg. Personality name: String
 
-    print("listening...")
+    print("listening...") # notify on startup
 
-    while True:
+    while True: # Space for User view.
         try:
             transcription = stt.get_speech()
             
             if transcription:
-                print(f"You: {transcription}")
+                print(f"You: {transcription}") 
                 response = tr.generate_response(transcription)
                 print(f"Yuki: {response}")
 
         except KeyboardInterrupt:
-            print("\nExiting...")
+            print("\nExiting...") # notify on exit
             break
 
 if __name__ == "__main__":
