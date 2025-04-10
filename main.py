@@ -17,6 +17,7 @@ Here we will give the inputs to modules or the "personality"
 
 from input_control.speech_to_text import Speech_to_text
 from output.text_response import Text_Response
+from output.voice_output import Voice
 
 def main():
     stt = Speech_to_text()
@@ -32,6 +33,7 @@ def main():
                 print(f"You: {transcription}") 
                 response = tr.generate_response(transcription)
                 print(f"Yuki: {response}")
+                Voice.speak(response)
 
         except KeyboardInterrupt:
             print("\nExiting...") # notify on exit

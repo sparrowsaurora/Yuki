@@ -18,3 +18,5 @@ this is the list of steps to make the 'Yuki' MVP
 
 ^^ Note. in process of changing AI to Mixtral via OpenHermes with LoRa finetuning.
 ^^ personality dir will be replaced with markdown files describing the name and personality of each fine tune profile
+
+- fix issue of voice not being picked up.

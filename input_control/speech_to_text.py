@@ -15,7 +15,7 @@ class Speech_to_text:
         self.SILENCE_THRESHOLD = self.calibrate_noise_floor()
 
         self.LISTEN_TIMEOUT = 2.0  # Stop listening after X seconds of silence
-        self.MIN_SPEECH_DURATION = 1.0  # Must speak at least X seconds to be valid
+        self.MIN_SPEECH_DURATION = 0.8  # Must speak at least X seconds to be valid
         
         self.transcription_file = "input_control/stt_output.txt"
 
