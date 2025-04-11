@@ -23,7 +23,7 @@ def main():
     stt = Speech_to_text()
     tr = Text_Response("soft_dom") # takes one arg. Personality name: String
 
-    print("listening...") # notify on startup
+    print("Started") # notify on startup
 
     while True: # Space for User view.
         try:
@@ -32,7 +32,9 @@ def main():
             if transcription:
                 print(f"You: {transcription}") 
                 response = tr.generate_response(transcription)
+                print("AI Start ---------")
                 print(f"Yuki: {response}")
+                print("AI End ---------")
                 Voice.speak(response)
 
         except KeyboardInterrupt:
